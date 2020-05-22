@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Hash Map Example</title>
+</head>
+<body>
+	<script>
+		// [INIT]
+		var hash = {
+			"Jan": "1",
+			"Feb": "2"
+		}
+
+		// You can add in these ways:
+		// hash.Jan = '1';
+		// hash['Feb'] = '2';
+
+		// For length:
+		// console.log(Object.keys(hash).length)
+
+		// To fetch by key:
+		// console.log(hash['Feb']) // '2'
+
+		// To fetch all:
+		for(var key in hash) {
+			console.log(`Key: ${key}`)
+			console.log(`Value: ${hash[key]}`)
+		}
+	</script>
+</body>
+</html>
