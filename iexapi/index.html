@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<h2>Error</h2>
+</body>
+</html>
+
+<script>
+	// [INIT] //
+	const baseUrl = 'https://sandbox.iexapis.com'
+	const symbols = 'linkusdt'
+	const types = 'quote'
+	const token = ''
+	const url = `${baseUrl}/stable/stock/market/batch?symbols=${symbols}&types=${types}&token=${token}`
+
+
+	// [XMLHttpRequest] //
+	// This class allows you to send http requests!
+	const myRequest = new XMLHttpRequest()
+
+
+	// [REQUEST] //
+	// Create the request ==> send it!
+	myRequest.open('GET', url)
+	myRequest.send()
+
+
+	// [ON-DATA] //
+	myRequest.onload = async function() {
+		const IEXData = JSON.parse(myRequest.responseText)
+
+		console.log('IEXData:', IEXData)
+
+		document.body.innerHTML = JSON.stringify(IEXData)
+	}	
+</script>
