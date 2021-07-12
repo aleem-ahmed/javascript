@@ -1,0 +1,149 @@
+<!-- JQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- [SCROLLMAGIC] -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.js"
+	integrity="sha512-UgS0SVyy/0fZ0i48Rr7gKpnP+Jio3oC7M4XaKP3BJUB/guN6Zr4BjU0Hsle0ey2HJvPLHE5YQCXTDrx27Lhe7A=="
+	crossorigin="anonymous"
+	referrerpolicy="no-referrer"
+></script>
+
+<!-- [SCROLLMAGIC] Animation GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.js"></script>
+
+<!-- [SCROLLMAGIC] Debug.addindicator -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.js"></script>
+
+<!-- Tween Max -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+
+<script>
+	$(() => {
+		// [INIT] //
+		const flightpath = {
+			entry : {
+				curviness: 1.25,
+				autoRotate: true,
+				values: [
+					{ x: 100, y: -20 },
+					{ x: 300, y: 10 }
+				]
+			},
+
+			looping : {
+				curviness: 1.25,
+				autoRotate: true,
+				values: [
+					{ x: 510, y: 60 },
+					{ x: 620, y: -60 },
+					{ x: 500, y: -100 },
+					{ x: 380, y: 20 },
+					{ x: 500, y: 60 },
+					{ x: 580, y: 20 },
+					{ x: 620, y: 15 }
+				]
+			},
+
+			leave : {
+				curviness: 1.25,
+				autoRotate: true,
+				values: [
+					{ x: 660, y: 20 },
+					{ x: 800, y: 130 },
+					{ x: $(window).width() + 300, y: -100 },
+				]
+			}
+		}
+
+
+		// [SCROLL-MAGIC] Controller //
+		const controller = new ScrollMagic.Controller()
+
+
+		// [GSAP] TimeLine //
+		const tween = new TimelineMax()
+			.add(
+				TweenMax.to(
+					$("#plane"),
+					1.2,
+					{
+						css: { bezier: flightpath.entry },
+						ease: Power1.easeInOut
+					}
+				)
+			)
+			.add(
+				TweenMax.to(
+					$("#plane"),
+					2,
+					{
+						css: { bezier: flightpath.looping },
+						ease: Power1.easeInOut
+					}
+				)
+			)
+			.add(
+				TweenMax.to(
+					$("#plane"),
+					1,
+					{
+						css: { bezier:flightpath.leave },
+						ease: Power1.easeInOut
+					}
+				)
+			)
+
+		// build scene
+		const scene = new ScrollMagic
+			.Scene({
+				triggerElement: '#trigger',
+				duration: 500,
+				offset: 100
+			})
+			.setPin('#target')
+			.setTween(tween)
+			.addIndicators()
+			.addTo(controller)
+	})
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+
+<body>
+	<div class="spacer"></div>
+
+	<div id="target">
+		<img id="plane" src="./example_bezier.png">
+	</div>
+
+	<div class="spacer"></div>
+</body>
+
+
+</html>
+
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	.spacer {
+		background-color: azure;
+		height: 500px;
+	}
+
+	.spacer2 {
+		background-color: bisque;
+		height: 20px;
+	}
+</style>
