@@ -1,0 +1,117 @@
+<!-- BOOTSTRAP -->
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous"
+>
+
+<!-- JQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- [SCROLLMAGIC] -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.js"
+	integrity="sha512-UgS0SVyy/0fZ0i48Rr7gKpnP+Jio3oC7M4XaKP3BJUB/guN6Zr4BjU0Hsle0ey2HJvPLHE5YQCXTDrx27Lhe7A=="
+	crossorigin="anonymous"
+	referrerpolicy="no-referrer"
+></script>
+
+<!-- [SCROLLMAGIC] Animation GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.js"></script>
+
+<!-- [SCROLLMAGIC] Debug.addindicator -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.js"></script>
+
+<!-- [GSAP] Tween Max -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+
+<script>
+$(() => {
+	// [SCROLL-MAGIC] Controller //
+	const controller = new ScrollMagic.Controller()
+	let timeline = new TimelineMax();
+	const tween1 = TweenMax.fromTo(
+		$("#record"),
+		1,
+		{ opacity: 0 },
+		{
+			opacity: 1,
+			duration: 1
+		}
+	)
+	const tween2 = TweenMax.fromTo(
+		$("#record2"),
+		1,
+		{opacity: 0 },
+		{
+			opacity: 0.5,
+			duration: 1
+		}
+	)
+
+	timeline.add(tween1).add(tween2);
+
+	const scene = new ScrollMagic.Scene(
+		{
+			// Start point
+			triggerElement: '#trigger',
+			// offSet from the triggerElement
+			offset: 100,
+			// End point
+			duration: 2000,
+			// Placement of trigger (0 = top, 0.5 = middle, 1 = bottom)
+			triggerHook: .75
+		})
+		.setPin('#target')
+		.setTween(timeline)
+		.addTo(controller)
+		.addIndicators()
+})
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<div id="trigger" class="trigger"></div>
+
+	<div class="row w-100">
+		<div class="col-4">
+			<div id="target">
+				<img id="record" src="./record.png">
+			</div>
+		</div>
+
+		<div class="col-4"></div>
+
+		<div class="col-4">
+			<div id="target2">
+				<img id="record2" src="./record.png" class="">
+			</div>
+		</div>
+	</div>
+
+	<!-- Logo holder -->
+	<div class="position-fixed w-100 row m-0 p-0" style="top: 0;">
+		<!-- window spacer -->
+		<div class="col-4"></div>
+		
+		<!-- Logo -->
+		<div class="col-4 text-center bg-warning" style="height: 100vh;">
+			<img src="./dot.png">
+		</div>
+
+		<!-- window spacer -->
+		<div class="col-4"></div>
+	</div>
+
+	<div class="spacer"></div>
+</body>
+
+</html>

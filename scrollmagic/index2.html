@@ -36,7 +36,7 @@
 		const tween = new TimelineMax()
 			.add(
 				TweenMax.to(
-					$("#plane"),
+					$("#record"),
 					0,
 					{
 						css: {
@@ -52,8 +52,40 @@
 			)
 			.add(
 				TweenMax.to(
-					$("#plane"),
-					1,
+					$("#record"),
+					.5,
+					{
+						css: {
+							bezier: {
+								curviness: 0,
+								values: [
+									{ x: 0, y: -1000 }
+								]
+							},
+						},
+					}
+				)
+			)
+			.add(
+				TweenMax.from(
+					$("#record2"),
+					0,
+					{
+						css: {
+							bezier: {
+								curviness: 0,
+								values: [
+									{ x: 0, y: 1000 },
+								]
+							},
+						},
+					}
+				)
+			)
+			.add(
+				TweenMax.to(
+					$("#record2"),
+					.5,
 					{
 						css: {
 							bezier: {
@@ -73,7 +105,7 @@
 					// Start point
 					triggerElement: '#trigger',
 					// offSet from the triggerElement
-					//offset: 1000,
+					offset: 100,
 					// End point
 					duration: 2000,
 					// Placement of trigger (0 = top, 0.5 = middle, 1 = bottom)
@@ -101,10 +133,20 @@
 <body>
 	<div id="trigger" class="trigger"></div>
 
-	<!-- Left Animation -->
-	<div class="row w-100 m-0 p-0">
-		<div id="target" class="col-4">
-			<img id="plane" src="./record.png">
+	<div class="row w-100">
+		<div class="col-4">
+			<div id="target">
+				<img id="record" src="./record.png">
+			</div>
+		</div>
+
+		<div class="col-4"></div>
+
+		<div class="col-4">
+			<div id="target2">
+				<img id="record2
+				" src="./record.png" class="float-right">
+			</div>
 		</div>
 	</div>
 
@@ -115,7 +157,7 @@
 		
 		<!-- Logo -->
 		<div class="col-4 text-center bg-warning" style="height: 100vh;">
-			<img id="plane" src="./example_bezier.png">
+			<img src="./dot.png">
 		</div>
 
 		<!-- window spacer -->
@@ -151,14 +193,19 @@
 		*/
 	}
 
-	/* Hide scrollbar for Chrome, Safari and Opera */
+	/* Hide scrollbar for Chrome, Safari and Opera
 	body::-webkit-scrollbar {
-	display: none;
+		display: none;
 	}
+	*/
 
 	/* Hide scrollbar for IE, Edge and Firefox */
 	body {
-	-ms-overflow-style: none;  /* IE and Edge */
-	scrollbar-width: none;  /* Firefox */
+		/* IE and Edge
+		-ms-overflow-style: none;
+		*/
+		/* Firefox
+		scrollbar-width: none;
+		*/
 	}
 </style>
