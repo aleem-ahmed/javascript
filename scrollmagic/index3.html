@@ -29,28 +29,24 @@
 <script>
 $(() => {
 	// [SCROLL-MAGIC] Controller //
+	let timeline = new TimelineMax()
+
 	const controller = new ScrollMagic.Controller()
-	let timeline = new TimelineMax();
+
 	const tween1 = TweenMax.fromTo(
 		$("#record"),
 		1,
+		{ opacity: 1 },
 		{ opacity: 0 },
-		{
-			opacity: 1,
-			duration: 1
-		}
 	)
 	const tween2 = TweenMax.fromTo(
 		$("#record2"),
 		1,
-		{opacity: 0 },
-		{
-			opacity: 0.5,
-			duration: 1
-		}
+		{ opacity: 0 },
+		{ opacity: 1 },
 	)
 
-	timeline.add(tween1).add(tween2);
+	timeline.add(tween1, 0).add(tween2, 0)
 
 	const scene = new ScrollMagic.Scene(
 		{
@@ -79,20 +75,21 @@ $(() => {
 	<title>Document</title>
 </head>
 <body>
+	<div class="spacer"></div>
 	<div id="trigger" class="trigger"></div>
 
 	<div class="row w-100">
 		<div class="col-4">
 			<div id="target">
 				<img id="record" src="./record.png">
+				<img id="record2" src="./record.png">
 			</div>
 		</div>
 
 		<div class="col-4"></div>
 
 		<div class="col-4">
-			<div id="target2">
-				<img id="record2" src="./record.png" class="">
+			<div id="targe2t">
 			</div>
 		</div>
 	</div>
@@ -115,3 +112,9 @@ $(() => {
 </body>
 
 </html>
+
+<style>
+	.spacer {
+		margin-top: 600px;
+	}
+</style>
