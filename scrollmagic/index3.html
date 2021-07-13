@@ -29,11 +29,10 @@
 <script>
 $(() => {
 	// [SCROLL-MAGIC] Controller //
-	let timeline = new TimelineMax()
-
 	const controller = new ScrollMagic.Controller()
 
-	const tween1 = TweenMax.fromTo(
+	// [TWEEN] record //
+	const recordTween = TweenMax.fromTo(
 		$("#record"),
 		2,
 		{
@@ -57,7 +56,9 @@ $(() => {
 			},
 		}
 	)
-	const tween2 = TweenMax.fromTo(
+
+	// [TWEEN] record2 //
+	const record2Tween = TweenMax.fromTo(
 		$("#record2"),
 		2,
 		{
@@ -83,14 +84,19 @@ $(() => {
 	)
 
 	// [TWEEN] Hide Record //
-	const tween3 = TweenMax.to(
+	const hideRecord = TweenMax.to(
 		$("#record"),
-		2,
+		0.001,
 		{ opacity: 0 },
 	)
 
-	timeline.add(tween1, 0).add(tween2, 0).add(tween3, 2)
+	const timeline = new TimelineMax()
+		.add(recordTween, 0)
+		.add(record2Tween, 0)
+		.add(hideRecord, 2)
 
+
+	// [SCROLL-MAGIC] Scene //
 	const scene = new ScrollMagic.Scene(
 		{
 			// Start point
@@ -141,15 +147,13 @@ $(() => {
 		<div class="col-4"></div>
 		
 		<!-- Logo -->
-		<div class="col-4 text-center bg-warning" style="height: 100vh;">
-			<img src="./dot.png">
+		<div class="col-4 text-center border border-primary" style="height: 100vh;">
+			<h1>Logo Goes Here</h1>
 		</div>
 
 		<!-- window spacer -->
 		<div class="col-4"></div>
 	</div>
-
-	<div class="spacer"></div>
 </body>
 
 </html>
@@ -157,5 +161,21 @@ $(() => {
 <style>
 	.spacer {
 		margin-top: 800px;
+	}
+
+	/* Hide scrollbar for Chrome, Safari and Opera
+	*/
+	body::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge and Firefox */
+	body {
+		/* IE and Edge
+		*/
+		-ms-overflow-style: none;
+		/* Firefox
+		*/
+		scrollbar-width: none;
 	}
 </style>
