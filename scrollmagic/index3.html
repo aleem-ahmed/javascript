@@ -35,25 +35,68 @@ $(() => {
 
 	const tween1 = TweenMax.fromTo(
 		$("#record"),
-		1,
-		{ opacity: 1 },
-		{ opacity: 0 },
+		2,
+		{
+			css: {
+				bezier: {
+					curviness: 0,
+					values: [
+						{ x: 0, y: -2000 },
+					]
+				},
+			},
+		},
+		{
+			css: {
+				bezier: {
+					curviness: 0,
+					values: [
+						{ x: 0, y: 200 }
+					]
+				},
+			},
+		}
 	)
 	const tween2 = TweenMax.fromTo(
 		$("#record2"),
-		1,
-		{ opacity: 0 },
-		{ opacity: 1 },
+		2,
+		{
+			css: {
+				bezier: {
+					curviness: 0,
+					values: [
+						{ x: $(window).width() - 480, y: 200 },
+					]
+				},
+			},
+		},
+		{
+			css: {
+				bezier: {
+					curviness: 0,
+					values: [
+						{ x: $(window).width() - 480, y: -2000 }
+					]
+				},
+			},
+		}
 	)
 
-	timeline.add(tween1, 0).add(tween2, 0)
+	// [TWEEN] Hide Record //
+	const tween3 = TweenMax.to(
+		$("#record"),
+		2,
+		{ opacity: 0 },
+	)
+
+	timeline.add(tween1, 0).add(tween2, 0).add(tween3, 2)
 
 	const scene = new ScrollMagic.Scene(
 		{
 			// Start point
 			triggerElement: '#trigger',
 			// offSet from the triggerElement
-			offset: 100,
+			offset: 0,
 			// End point
 			duration: 2000,
 			// Placement of trigger (0 = top, 0.5 = middle, 1 = bottom)
@@ -82,15 +125,13 @@ $(() => {
 		<div class="col-4">
 			<div id="target">
 				<img id="record" src="./record.png">
-				<img id="record2" src="./record.png">
+				<img id="record2" src="./record2.png">
 			</div>
 		</div>
-
+		
 		<div class="col-4"></div>
-
-		<div class="col-4">
-			<div id="targe2t">
-			</div>
+		
+		<div class="col-4"></div>
 		</div>
 	</div>
 
@@ -115,6 +156,6 @@ $(() => {
 
 <style>
 	.spacer {
-		margin-top: 600px;
+		margin-top: 800px;
 	}
 </style>
